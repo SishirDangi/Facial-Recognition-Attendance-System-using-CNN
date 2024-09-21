@@ -19,10 +19,10 @@
     <div class="container">
         <div class="login-container">
             <h2 class="login">Login</h2>
-            <p>Please Enter Your Username and Password</p> 
-            <form>
-                <input type="text" placeholder="Username" required>
-                <input type="password" placeholder="Password" required>
+            <p>Please Enter Your ID and Password</p> 
+            <form action="login.php" method="POST">
+                <input type="text" name="user_id" placeholder="ID" required>
+                <input type="password" name="password" placeholder="Password" required>
                 
                 <p class="profile_l">Please select your profile</p>
                 
@@ -31,7 +31,7 @@
                         <input type="radio" name="profile" value="student" required> Student
                     </label>
                     <label>
-                        <input type="radio" name="profile" value="teacher" required> Teacher
+                        <input type="radio" name="profile" value="admin" required> Admin
                     </label>
                 </div>
                 <button type="submit">LOGIN</button>
