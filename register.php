@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($conn->query($sql) === TRUE) {
         echo "Account created successfully";
-        header("Location: login.html");  // Redirect to login page
+        header("Location: login.php");  // Redirect to login page
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
