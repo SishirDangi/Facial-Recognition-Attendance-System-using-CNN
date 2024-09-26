@@ -14,8 +14,7 @@ $adminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : "Unknown
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Dashboard.css"> <!-- Ensure this CSS file is available -->
-</head>
+    <link rel="stylesheet" href="Dashboard.css">
 <body>
     <header>
         <div class="logo-section">
@@ -23,7 +22,7 @@ $adminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : "Unknown
             <h1>MeroHajiri</h1>
         </div>
         <div class="user-section">
-            Hi, <span id="first_name"><?php echo $adminName; ?></span> <!-- Display admin name here -->
+            Hi, <span id="first_name"><?php echo $adminName; ?></span> 
         </div>
     </header>
 
@@ -38,7 +37,7 @@ $adminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : "Unknown
 
     <div class="main-content">
         <h2>&nbsp;&nbsp;&nbsp;Welcome to the Admin Dashboard</h2>
-        <!-- Admin specific content goes here -->
+       
     </div>
 
     <script>
