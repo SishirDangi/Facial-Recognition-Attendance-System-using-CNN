@@ -2,8 +2,8 @@
 session_start();
 include 'config.php';
 
-$student_id = $_SESSION['student_id'];  // Assuming student is logged in and session is set
-$action = $_POST['action'];  // Action can be 'checkin' or 'checkout'
+$student_id = $_SESSION['student_id'];
+$action = $_POST['action'];
 
 if ($action === 'checkin') {
     $sql = "INSERT INTO StudentAttendanceLog (student_id, check_in_time, attendance_date) 

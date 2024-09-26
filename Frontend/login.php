@@ -1,49 +1,49 @@
 <?php
-session_start(); // Start the session
-include 'config.php'; // Include the database configuration
-
+session_start(); 
+include 'config.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $profile = $_POST['profile']; // Student or Admin
-
-    // Prepare query based on user profile
+    $user_id = htmlspecialchars(trim($_POST['user_id']));
+    $password = trim($_POST['password']);
+    $profile = htmlspecialchars(trim($_POST['profile']));
     if ($profile == 'student') {
         $sql = "SELECT * FROM students WHERE student_id = ?";
     } else if ($profile == 'admin') {
         $sql = "SELECT * FROM admins WHERE admin_id = ?";
+    } else {
+        die("Invalid profile selected.");
     }
-
-    // Prepare statement
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Statement preparation failed: " . $conn->error);
+    }
     $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-
-        // Verify the password
         if (password_verify($password, $row['password'])) {
-            // Successful login
-            $_SESSION['student_id'] = $row['student_id']; // Use the correct column name for student_id
-            $_SESSION['profile'] = $profile;
-
-            // Redirect to the appropriate dashboard
             if ($profile == 'student') {
-                header("Location: Student/StudentDashboard.php");
+                $_SESSION['student_id'] = $row['student_id'];
+                $_SESSION['student_name'] = $row['first_name']; // Store student name in session
+                $_SESSION['profile'] = 'student';
+                header("Location: StudentDashboard.php");
+                exit();
             } else if ($profile == 'admin') {
-                header("Location: Admin/AdminDashboard.php");
+                $_SESSION['admin_id'] = $row['admin_id'];
+                $_SESSION['admin_name'] = $row['first_name']; // Store admin name in session
+                $_SESSION['profile'] = 'admin';
+                header("Location: AdminDashboard.php");
+                exit();
             }
-            exit(); // End script after redirection
         } else {
-            echo "Invalid password.";
+            echo "<script>alert('Invalid password. Please try again.');</script>";
         }
     } else {
-        echo "No account found with this ID.";
+        echo "<script>alert('No account found with the given ID. Please check your ID and try again.');</script>";
     }
 
-    // Close the connection
     $stmt->close();
     $conn->close();
 }
@@ -56,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MeroHajiri Login</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css"> 
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <header>
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
         <div class="login-container">
             <h2 class="login">Login</h2>
-            <p>Please Enter Your ID and Password</p> 
+            <p>Please enter your ID and password to access the system.</p>
             <form action="login.php" method="POST">
                 <input type="text" name="user_id" placeholder="ID" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -93,5 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <footer>
         <p>&copy; MeroHajiri 2024. All rights reserved.</p>
     </footer>
+    <script>
+        function showAlert(message) {
+            alert(message); 
+        }
+    </script>
 </body>
 </html>

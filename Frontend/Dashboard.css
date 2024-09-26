@@ -1,11 +1,9 @@
-/* Basic styling for the header and dashboard layout */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #cac3c3;
 }
-
 
 #datetime {
     font-size: 16px;
@@ -57,7 +55,6 @@ body {
     text-align: center;
 }
 
-
 .dashboard .card h3 {
     margin: 0;
     font-size: 24px;
@@ -68,14 +65,13 @@ body {
     font-size: 16px;
 }
 
-
 header {
     padding: 5px;
     background-color: #0078F0;
     color: #000000;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribute space between logo and username */
+    justify-content: space-between; 
 }
 
 .user-section {

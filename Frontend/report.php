@@ -10,8 +10,8 @@ if (!isset($_SESSION['student_id'])) {
     exit();
 }
 
-$student_id = $_SESSION['student_id'];  // This is the `student_id` from the `students` table
-echo "Current Session Student ID: " . $student_id . "<br>"; // Debugging
+$student_id = $_SESSION['student_id']; 
+echo "Current Session Student ID: " . $student_id . "<br>";
 
 $sql = "SELECT 
             s.first_name, 
@@ -24,12 +24,12 @@ $sql = "SELECT
         FROM 
             StudentAttendanceLog a
         JOIN 
-            students s ON a.student_id = s.id  -- Using `id` from `students`
+            students s ON a.student_id = s.id  
         WHERE 
-            s.student_id = ?";  // `student_id` from the session
+            s.student_id = ?"; 
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("s", $student_id);  // Bind student_id from session
+    $stmt->bind_param("s", $student_id);  
     $stmt->execute();
     $result = $stmt->get_result();
 

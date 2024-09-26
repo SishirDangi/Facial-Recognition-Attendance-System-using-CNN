@@ -2,7 +2,7 @@
 // Database configuration file (config.php)
 $servername = "localhost";
 $username = "root";
-$password = "";  // Change this to your MySQL password
+$password = ""; 
 $dbname = "MeroHajiriStudentData";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

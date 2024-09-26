@@ -46,7 +46,6 @@ header h1 {
     flex: 1;
 }
 
-/* Title and about section */
 .title-section {
     display: flex;
     flex-direction: column;
@@ -55,13 +54,13 @@ header h1 {
 }
 
 .title-section h2 {
-    font-size: 70px; /* Increased from 48px */
+    font-size: 70px; 
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
 .title-section h3 {
-    font-size: 41px; /* Increased from 36px */
+    font-size: 41px; 
     margin-bottom: 20px;
     
 }
@@ -83,7 +82,6 @@ header h1 {
     text-align: justify;
 }
 
-/* Account creation section */
 .account-section {
     width: 25%;
     background-color: #ffffff;
@@ -158,9 +156,9 @@ header h1 {
 
 footer {
     text-align: center;
-    padding: 10px; /* Increased padding */
+    padding: 10px; 
     background-color: #0078F0;
-    font-size: 16px; /* Increased font size */
+    font-size: 16px; 
     margin-top: auto;
     width: 100%;
 }
@@ -175,11 +173,11 @@ footer {
     font-size: 16px;
 }
 input[type="text"], input[type="email"], input[type="password"], select {
-    width: 100%; /* Make all inputs and select take up the same width */
-    padding: 6px; /* Add padding for consistent height */
-    margin: 3px 0; /* Add some margin for spacing */
-    border: 1px solid #ccc; /* Add border for all */
-    border-radius: 4px; /* Optional, for rounded corners */
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
-    font-size: 16px; /* Set the same font size */
+    width: 100%;
+    padding: 6px;
+    margin: 3px 0;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+    font-size: 16px;
 }

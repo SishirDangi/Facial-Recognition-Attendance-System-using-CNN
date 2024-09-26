@@ -1,7 +1,7 @@
 <?php
-session_start(); // Start session to track logged-in user
+session_start();
 
-include 'config.php'; // Include the database configuration
+include 'config.php';
 
 if (!isset($_SESSION['student_id'])) {
     // Redirect to login if the student_id is not set
@@ -16,7 +16,7 @@ if (!isset($_SESSION['student_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="StudentDashboard.css">
+    <link rel="stylesheet" href="Dashboard.css">
 </head>
 <body>
 
@@ -35,11 +35,10 @@ if (!isset($_SESSION['student_id'])) {
     <div id="datetime">Loading date and time...</div>
     <a href="StudentDashboard.php">Dashboard</a>
     <a href="#">Attendance Sheet</a>
-    <a href="report.php">Report</a>
-    <a href="takeattendance.php">Take Attendance</a> <!-- Updated Link -->
+    <a href="report.php">Attendance Report</a>
+    <a href="takeattendance.php">Take Attendance</a> 
     <a href="#" onclick="openLogoutDialog()">Logout</a>
 
-<!-- Custom Confirmation Dialog -->
 <div id="logoutDialog" style="display: none;">
   <div class="dialog-box">
     <p>Are you sure you want to logout?</p>
@@ -50,27 +49,27 @@ if (!isset($_SESSION['student_id'])) {
 
 <script>
 function openLogoutDialog() {
-    document.getElementById('logoutDialog').style.display = 'flex'; // Show the dialog
+    document.getElementById('logoutDialog').style.display = 'flex'; 
 }
 
 function closeLogoutDialog() {
-    document.getElementById('logoutDialog').style.display = 'none'; // Hide the dialog
+    document.getElementById('logoutDialog').style.display = 'none'; 
 }
 
 function confirmLogout() {
-    window.location.href = "index.php"; // Redirect to index.php if user confirms
+    window.location.href = "index.php"; 
 }
 </script>
 
 <style>
-/* Styles for the custom dialog box */
+
 #logoutDialog {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;

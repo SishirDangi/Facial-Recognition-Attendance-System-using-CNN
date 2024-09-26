@@ -2,7 +2,6 @@
 session_start();
 include 'config.php';
 
-// Redirect to login if the student is not logged in
 if (!isset($_SESSION['student_id'])) {
     header("Location: login.php");
     exit();
@@ -22,10 +21,7 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-// Call Python script for face recognition
 $output = shell_exec("python3 takeattendance.py $student_id");
-
-// If the Python script returns success, log the attendance in the database
 if (trim($output) === "success") {
     $sql = "INSERT INTO StudentAttendanceLog (student_id, check_in_time, attendance_date) VALUES (?, NOW(), CURDATE())";
     $stmt = $conn->prepare($sql);
