@@ -9,8 +9,7 @@
 <body>
     <header>
         <div class="logo-section">
-            <img src="photo/MeroHajiri_logo.png" alt="MeroHajiri Logo" class="logo"> <!-- Ensure this file exists -->
-            <h1>MeroHajiri</h1>
+            <img src="photo/MeroHajiri_logo.png" alt="MeroHajiri Logo" class="logo"> 
         </div>
     </header>
 
@@ -22,7 +21,7 @@
         </div>
 
         <div class="account-section">
-            <form class="create-account-form" action="register.php" method="POST"> <!-- Ensure register.php exists -->
+            <form class="create-account-form" action="register.php" method="POST"> 
                 <h3>CREATE ACCOUNT FOR STUDENT</h3>
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
@@ -50,7 +49,7 @@
             <br>
             <p>Already registered?</p>
             <div class="login-btn">
-                <button type="button" class="login-button" onclick="window.location.href='login.php';">Login</button> <!-- Ensure login.php exists -->
+                <button type="button" class="login-button" onclick="window.location.href='login.php';">Login</button>
             </div>
         </div>
     </section>

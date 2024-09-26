@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $row['password'])) {
             if ($profile == 'student') {
                 $_SESSION['student_id'] = $row['student_id'];
-                $_SESSION['student_name'] = $row['first_name']; // Store student name in session
+                $_SESSION['student_name'] = $row['first_name']; 
                 $_SESSION['profile'] = 'student';
                 header("Location: StudentDashboard.php");
                 exit();
             } else if ($profile == 'admin') {
                 $_SESSION['admin_id'] = $row['admin_id'];
-                $_SESSION['admin_name'] = $row['first_name']; // Store admin name in session
+                $_SESSION['admin_name'] = $row['first_name']; 
                 $_SESSION['profile'] = 'admin';
                 header("Location: AdminDashboard.php");
                 exit();
