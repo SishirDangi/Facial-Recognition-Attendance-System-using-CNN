@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        h1 {
+            background-color: #0078F0;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .video-container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .video-container img {
+            width: 100%;
+            height: auto;
+            border: 5px solid #ddd;
+            border-radius: 10px;
+        }
+        .actions {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .actions button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #0078F0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .actions button:hover {
+            background-color: #005bb5;
+        }
+        .message {
+            margin: 20px auto;
+            max-width: 800px;
+            font-size: 18px;
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+    <script>
+        function takeAttendance() {
+            fetch('/take_attendance', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    const messageDiv = document.getElementById('message');
+                    if (data.status === 'success') {
+                        messageDiv.classList.remove('error');
+                        messageDiv.textContent = data.message;
+                    } else {
+                        messageDiv.classList.add('error');
+                        messageDiv.textContent = data.message;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Face Recognition Attendance System</h1>
+    <div class="video-container">
+        <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+    </div>
+    <div class="actions">
+        <button onclick="takeAttendance()">Take Attendance</button>
+    </div>
+    <div id="message" class="message"></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Dataset</title>
+</head>
+<body>
+    <h1>Face Dataset Capture and Training</h1>
+    <form id="captureForm">
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id" required><br><br>
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name" required><br><br>
+        <button type="submit">Capture Images</button>
+    </form>
+
+    <h2>Train Model</h2>
+    <button id="trainButton">Train Model</button>
+    <p id="progress">Training Progress: 0%</p>
+    <p id="status"></p>
+
+    <script>
+        document.getElementById("captureForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            fetch("/capture", {
+                method: "POST",
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = data.message;
+                })
+                .catch(err => console.error(err));
+        });
+
+        document.getElementById("trainButton").addEventListener("click", function () {
+            fetch("/train", { method: "POST" })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = data.message;
+                    const interval = setInterval(() => {
+                        fetch("/progress")
+                            .then(response => response.json())
+                            .then(progress => {
+                                document.getElementById("progress").innerText = `Training Progress: ${progress.progress}%`;
+                                if (progress.progress === 100) {
+                                    clearInterval(interval);
+                                    document.getElementById("status").innerText = "Training completed!";
+                                }
+                            });
+                    }, 1000);
+                })
+                .catch(err => console.error(err));
+        });
+    </script>
+</body>
+</html>

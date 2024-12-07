@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        .report-header {
+            background-color: #e7edfc;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+        }
+        .report-header select, .report-header input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex: 1;
+        }
+        .report-header button {
+            padding: 10px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #3f83f8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .report-header button:hover {
+            background-color: #1c5ccf;
+        }
+        .report-content {
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .report-content th, .report-content td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .report-content th {
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            margin: 10px 0;
+        }
+        .download-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .download-link a {
+            color: #3f83f8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Report</h2>
+        <form method="GET" action="/report">
+            <div class="report-header">
+                <select name="course" required>
+                    <option value="" selected disabled>Select a course</option>
+                    <option value="Bsc.CSIT">Bsc.CSIT</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BBA">BBA</option>
+                    <option value="BBS">BBS</option>
+                    <option value="BIM">BIM</option>
+                    <option value="BIT">BIT</option>
+                </select>
+                
+                <input type="text" name="batch" placeholder="Enter Batch (e.g., 2077)" required>
+
+                <input type="date" name="date">
+
+                <button type="submit">Generate Report</button>
+            </div>
+        </form>
+
+        <div class="report-content">
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            {% if records and records|length > 0 %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Full Name</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th>Attendance Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                            <tr>
+                                <td>{{ record.student_id }}</td>
+                                <td>{{ record.full_name }}</td>
+                                <td>{{ record.course }}</td>
+                                <td>{{ record.batch }}</td>
+                                <td>{{ record.attendance_time }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p></p>
+            {% endif %}
+
+            {% if download_link %}
+                <div class="download-link">
+                    <p><a href="{{ download_link }}" download="student_attendance_report.csv">Click here to download the report as CSV</a></p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
